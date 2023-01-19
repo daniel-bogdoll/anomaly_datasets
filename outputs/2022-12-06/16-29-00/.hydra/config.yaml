@@ -1,0 +1,5 @@
+dataset: bdd-anomaly
+save_dir: ./figures
+bdd-anomaly:
+  _target_: datasets.bdd-anomaly.BDDAnomaly
+  root: /home/uhlemeyer/PyCharmProjects/anomaly-seg/seg/labels

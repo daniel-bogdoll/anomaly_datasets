@@ -1,0 +1,40 @@
+dataset: fishyscapes-static
+
+save_dir: ./figures
+
+#### datasets
+bdd-anomaly:
+  _target_: datasets.bdd-anomaly.BDDAnomaly
+  root: /home/uhlemeyer/PyCharmProjects/anomaly-seg/seg/labels
+
+roadanomaly:
+  _target_: datasets.roadanomaly.RA21
+  root: /home/uhlemeyer/PyCharmProjects/dataset-obstacles-master/datasets/dataset_AnomalyTrack/labels_masks
+
+roadobstacle:
+  _target_: datasets.roadobstacle.RO21
+  root: /home/uhlemeyer/PyCharmProjects/dataset-obstacles-master/datasets/dataset_ObstacleTrack/labels_masks
+
+streethazards:
+  _target_: datasets.streethazards.SH
+  root: /home/datasets/streethazards/test/annotations/test
+
+laf:
+  _target_: datasets.lostandfound.LAF
+  root: /home/datasets/lost_and_found/gtCoarse/test
+
+fishyscapes-laf:
+  _target_: datasets.fishy-laf.FLAF
+  root: /home/uhlemeyer/PyCharmProjects/dataset-obstacles-master/datasets/dataset_FishyLAF/labels/val
+
+fishyscapes-static:
+  _target_: datasets.fishy-static.FST
+  root: /home/datasets/fishyscapes/Static
+
+cwl:
+  _target_: datasets.cwl.CWL
+  root: /home/kowol/ood_data_final/carla_wildlife_sequences/semantic_ood
+
+sos:
+  _target_: datasets.sos.SOS
+  root: /home/kowol/ood_data_final/street_obstacle_sequences/semantic_ood
