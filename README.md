@@ -11,7 +11,7 @@ Repository for the paper "Perception Datasets for Anomaly Detection in Autonomou
 ## Citation
 If you find our work useful for your research, please cite our paper:
 ```
-@article{Bogdoll_Impact_2023_arXiv,
+@article{Bogdoll_Perception_2023_arXiv,
     author    = {Daniel Bogdoll, Svenja Uhlemeyer, Kamil Kowol, J. Marius Zöllner},
     title     = {{Perception Datasets for Anomaly Detection in Autonomous Driving: A Survey}},
     journal   = {arXiv:XXXX.XXXXXXXX},
