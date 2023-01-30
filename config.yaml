@@ -1,40 +1,68 @@
-dataset: fishyscapes-static
+dataset: wd-pascal
 
 save_dir: ./figures
 
 #### datasets
-bdd-anomaly:
-  _target_: datasets.bdd-anomaly.BDDAnomaly
-  root: /home/uhlemeyer/PyCharmProjects/anomaly-seg/seg/labels
+coda-sample:
+  _target_: datasets.coda-sample.CODASample
+  root: /datasets/CODA_masks/sample
+
+coda2022-once:
+  _target_: datasets.coda2022-once.CODA2022ONCE
+  root: /datasets/CODA_masks/2022once
+
+coda2022-soda10m:
+  _target_: datasets.coda2022-soda10m.CODA2022SODA10M
+  root: /datasets/CODA_masks/2022soda10m
+
+coda-kitti:
+  _target_: datasets.coda-kitti.CODAKITTI
+  root: /datasets/CODA_masks/kitti
+
+coda-once:
+  _target_: datasets.coda-once.CODAONCE
+  root: /datasets/CODA_masks/once
+
+coda-nuscenes:
+  _target_: datasets.coda-nuscenes.CODANuscenes
+  root: /datasets/CODA_masks/nuscenes
+
+wd-pascal:
+  _target_: datasets.wd-pascal.WDP
+  root: /datasets/wd-pascal/label
 
 roadanomaly:
   _target_: datasets.roadanomaly.RA21
-  root: /home/uhlemeyer/PyCharmProjects/dataset-obstacles-master/datasets/dataset_AnomalyTrack/labels_masks
+  root: /datasets/dataset_AnomalyTrack/labels_masks
+
+vistas-np:
+  _target_: datasets.vistas-np.VistasNP
+  root: /datasets/vistas-np
+
+bdd-anomaly:
+  _target_: datasets.bdd-anomaly.BDDAnomaly
+  root: /datasets/anomaly-seg/seg/labels
 
 roadobstacle:
   _target_: datasets.roadobstacle.RO21
-  root: /home/uhlemeyer/PyCharmProjects/dataset-obstacles-master/datasets/dataset_ObstacleTrack/labels_masks
+  root: /datasets/dataset_ObstacleTrack/labels_masks
 
 streethazards:
   _target_: datasets.streethazards.SH
-  root: /home/datasets/streethazards/test/annotations/test
+  root: /datasets/streethazards/test/annotations/test
 
 laf:
   _target_: datasets.lostandfound.LAF
-  root: /home/datasets/lost_and_found/gtCoarse/test
+  root: /datasets/lost_and_found/gtCoarse/test
 
 fishyscapes-laf:
   _target_: datasets.fishy-laf.FLAF
-  root: /home/uhlemeyer/PyCharmProjects/dataset-obstacles-master/datasets/dataset_FishyLAF/labels/val
-
-fishyscapes-static:
-  _target_: datasets.fishy-static.FST
-  root: /home/datasets/fishyscapes/Static
+  root: /datasets/dataset_FishyLAF/labels/val
 
 cwl:
   _target_: datasets.cwl.CWL
-  root: /home/kowol/ood_data_final/carla_wildlife_sequences/semantic_ood
+  root: /datasets/carla_wildlife_sequences/semantic_ood
 
 sos:
   _target_: datasets.sos.SOS
-  root: /home/kowol/ood_data_final/street_obstacle_sequences/semantic_ood
+  root: /datasets/street_obstacle_sequences/semantic_ood

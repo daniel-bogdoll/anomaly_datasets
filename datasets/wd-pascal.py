@@ -4,11 +4,11 @@ from PIL import Image
 import numpy as np
 
 
-class FLAF(Dataset):
-    def __init__(self, root="/datasets/dataset_FishyLAF/labels/val"):
+class WDP(Dataset):
+    def __init__(self, root="/datasets/wd-pascal/label"):
         self.root = root
         self.img_labels = []
-        self.resolutions = [(1024, 2048)]
+        self.resolutions = [(1088, 1920)]
         self.ood_id = [1]
 
         for im in os.listdir(self.root):
@@ -18,5 +18,5 @@ class FLAF(Dataset):
         return len(self.img_labels)
 
     def __getitem__(self, i):
-        target = Image.open(self.img_labels[i]).convert("L")
-        return np.asarray(target, dtype=np.int16)
+        target = np.load(self.img_labels[i])
+        return target

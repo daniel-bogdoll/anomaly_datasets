@@ -4,12 +4,12 @@ from PIL import Image
 import numpy as np
 
 
-class FLAF(Dataset):
-    def __init__(self, root="/datasets/dataset_FishyLAF/labels/val"):
+class CODANuscenes(Dataset):
+    def __init__(self, root="/datasets/CODA_masks/nuscenes"):
         self.root = root
         self.img_labels = []
-        self.resolutions = [(1024, 2048)]
-        self.ood_id = [1]
+        self.resolutions = [(900, 1600)]
+        self.ood_id = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
         for im in os.listdir(self.root):
             self.img_labels.append(os.path.join(self.root, im))
@@ -18,5 +18,5 @@ class FLAF(Dataset):
         return len(self.img_labels)
 
     def __getitem__(self, i):
-        target = Image.open(self.img_labels[i]).convert("L")
-        return np.asarray(target, dtype=np.int16)
+        target = np.load(self.img_labels[i])
+        return target
