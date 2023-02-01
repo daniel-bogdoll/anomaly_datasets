@@ -37,7 +37,7 @@ After that, another entry must be added to the configuration file according to t
 ```bash
 new_dataset:
   _target_: datasets.new_dataset.ND
-  root: /datasets/new_dataset/FOLDER_WITH_MASKS
+  root: /PATH/TO/DATASET
 ```
 
 ## Citation
