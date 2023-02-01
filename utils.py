@@ -6,6 +6,11 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import hydra
+from PIL import Image
+import numpy as np
+from skimage.segmentation import mark_boundaries
+from scipy.ndimage.morphology import binary_dilation
+import cv2
 
 matplotlib.use("Agg")
 os.environ["PATH"] = os.environ["PATH"] + ":/Library/TeX/texbin"  # for tex in matplotlib
@@ -16,7 +21,6 @@ plt.rc("text", usetex=True)
 def get_dataset(dataset_class, **kwargs):
     """returns _target_ as defined in config"""
     return hydra.utils.instantiate(dataset_class, **kwargs)
-
 
 def shiftedColorMap(cmap, start=0, midpoint=0.5, stop=1.0, name="shiftedcmap"):
     """
@@ -66,7 +70,6 @@ def shiftedColorMap(cmap, start=0, midpoint=0.5, stop=1.0, name="shiftedcmap"):
 
     return newcmap
 
-
 def plot_and_save_heatmap_only(heat_array, save_path):
     heat_array = heat_array.astype("float")
     h, w = heat_array.shape
@@ -86,7 +89,6 @@ def plot_and_save_heatmap_only(heat_array, save_path):
     plt.colorbar(heat_im)
     plt.close()
     Image.fromarray(heat_im.astype("uint8")).save(save_path)
-
 
 def plot_and_save_heatmap(arr, save_path):
 
@@ -114,7 +116,6 @@ def int_div(n):
     else:
         return (int(n // 2), int(n // 2 + 1))
 
-
 def compute_heatmap(loader, resolutions, ids, save_name):
 
     h, w = np.split(np.array(resolutions), 2, axis=1)
@@ -135,7 +136,6 @@ def compute_heatmap(loader, resolutions, ids, save_name):
     plot_and_save_heatmap(heatmap, save_name)
     print("Heatmap saved: ", save_name, "Max. pixel value: ", np.max(heatmap))
 
-
 def compute_heatmap_coda(loader, resolutions, ids, save_name):
 
     h, w = np.split(np.array(resolutions), 2, axis=1)
@@ -153,3 +153,42 @@ def compute_heatmap_coda(loader, resolutions, ids, save_name):
         heatmap += gt
     plot_and_save_heatmap(heatmap, save_name)
     print("Heatmap saved: ", save_name, "Max. pixel value: ", np.max(heatmap))
+
+def get_boundary_mask(arr, index=1, color=[0,1,0]):
+    arr2 = np.copy(arr)
+    arr2[arr != index] = 0
+    arr2[arr == index] = 255
+    gt = Image.fromarray(arr2.astype("uint8"))
+    bd = mark_boundaries(gt, arr2)
+    mask = binary_dilation(np.all(bd == [1, 1, 0], axis=-1).astype(int)).astype("uint8")
+    mask = cv2.dilate(mask, kernel = np.ones((4, 4), np.uint8), iterations=1)
+    bd[np.all(bd == np.ones(3), axis=-1)] = np.zeros(3)
+    bd[mask == 1] = color
+    im = (bd * 255).astype("uint8")
+    return im
+
+def compute_and_save_overlay_i(image, gt, ids, save_name):
+    color = 255 * np.ones(image.shape)
+    color[gt==255] = (0, 0, 0)
+    color[np.isin(gt, ids)] = (255, 102, 0)
+    out = np.copy(image)
+    out[~np.all(color == 255*np.ones(3), axis=-1)] = \
+          0.3*out[~np.all(color == 255*np.ones(3), axis=-1)] \
+        + 0.7*color[~np.all(color == 255*np.ones(3), axis=-1)]
+    overlay = np.copy(gt)
+
+    blend = get_boundary_mask(overlay, index=0, color=[1,0,0])
+    for i in ids:
+        blend = blend + get_boundary_mask(overlay, index=i, color=[-1,1,0])
+
+    out[~np.all(blend == np.zeros(3), axis=-1)] = blend[~np.all(blend == np.zeros(3), axis=-1)]
+    Image.fromarray(out.astype("uint8")).save(save_name)
+
+def compute_and_save_overlays(data, loader, save_dir):
+    for i, (image, gt) in enumerate(loader):
+        save_name = data.images[i].split('/')[-1].split('.')[0] + '_blend.png'
+        save_path = os.path.join(save_dir, save_name)
+        gt = np.array(gt)
+        gt = np.squeeze(gt)
+        image = np.squeeze(image)
+        compute_and_save_overlay_i(image, gt, data.ood_id, save_path)

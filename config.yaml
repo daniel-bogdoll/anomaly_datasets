@@ -1,6 +1,10 @@
-dataset: wd-pascal
+dataset: roadanomaly
 
 save_dir: ./figures
+
+#### tasks
+heatmap: False
+overlay: True
 
 #### datasets
 coda-sample:
@@ -33,7 +37,7 @@ wd-pascal:
 
 roadanomaly:
   _target_: datasets.roadanomaly.RA21
-  root: /datasets/dataset_AnomalyTrack/labels_masks
+  root: /home/uhlemeyer/PyCharmProjects/dataset-obstacles-master/datasets/dataset_AnomalyTrack
 
 vistas-np:
   _target_: datasets.vistas-np.VistasNP
