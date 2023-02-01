@@ -122,7 +122,7 @@ def compute_heatmap(loader, resolutions, ids, save_name):
     w_max = w.max()
     h_max = h.max()
     heatmap = np.zeros((h_max, w_max))
-    for gt in loader:
+    for _, gt in loader:
         gt = np.squeeze(gt.numpy())
         gt[~(np.isin(gt, ids))] = 0
         gt[np.isin(gt, ids)] = 1
