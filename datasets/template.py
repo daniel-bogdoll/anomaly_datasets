@@ -14,9 +14,8 @@ class ND(Dataset):
 
         for seq in os.listdir(root):
             for im in os.listdir(os.path.join(self.root, seq, 'images')):
-                self.images.append(os.path.join(self.root, seq, im))
-            for im in os.listdir(os.path.join(self.root, seq, 'label')):
-                self.img_labels.append(os.path.join(self.root, seq, im))
+                self.images.append(os.path.join(self.root, seq, 'images', im))
+                self.img_labels.append(os.path.join(self.root, seq, 'label', im))
 
     def __len__(self):
         return len(self.img_labels)

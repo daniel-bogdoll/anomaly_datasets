@@ -12,9 +12,9 @@ class WDP(Dataset):
         self.resolutions = [(1088, 1920)]
         self.ood_id = [1]
 
-        for im in os.listdir(self.root, 'images'):
-            self.images.append(os.path.join(self.root, 'images', im))
-            self.img_labels.append(os.path.join(self.root, 'labels', im))
+        for im in os.listdir(self.root, 'images'): #TODO
+            self.images.append(os.path.join(self.root, 'images', im)) #TODO
+            self.img_labels.append(os.path.join(self.root, 'labels', im)) #TODO
 
     def __len__(self):
         return len(self.img_labels)

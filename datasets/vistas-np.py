@@ -5,8 +5,9 @@ import numpy as np
 
 
 class VistasNP(Dataset):
-    def __init__(self, root="/datasets/Vistas-NP/vistas-np"):
+    def __init__(self, root):
         self.root = root
+        self.images = []
         self.img_labels = []
         self.resolutions = [
             (3000, 4000),
@@ -189,11 +190,14 @@ class VistasNP(Dataset):
 
         for split in ["test/labels", "training/labels", "validation/labels"]:
             for im in os.listdir(os.path.join(self.root, split)):
+                self.images.append() #TODO
                 self.img_labels.append(os.path.join(self.root, split, im))
 
     def __len__(self):
         return len(self.img_labels)
 
     def __getitem__(self, i):
+        image = np.array(Image.open(self.images[i]))
         target = Image.open(self.img_labels[i]).convert("L")
-        return np.asarray(target, dtype=np.int16)
+        target = np.asarray(target, dtype=np.int16)
+        return image, target
