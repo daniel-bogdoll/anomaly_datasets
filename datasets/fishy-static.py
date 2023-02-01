@@ -15,8 +15,7 @@ class FST(Dataset):
         for im in os.listdir(self.root):
             if im[-3:] == "png":
                 self.img_labels.append(os.path.join(self.root, im))
-            elif im[-3:] == "jpg":
-                self.images.append(os.path.join(self.root, im))
+                self.images.append(os.path.join(self.root, im.replace('png', 'jpg')))
 
     def __len__(self):
         return len(self.img_labels)
