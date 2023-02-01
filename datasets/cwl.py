@@ -12,10 +12,10 @@ class CWL(Dataset):
         self.resolutions = [(1080, 1920)]
         self.ood_id = [254]
 
-        for seq in os.listdir(root):
-            for im in os.listdir(os.path.join(self.root, seq, 'raw_data')):
-                self.images.append(os.path.join(root, seq, 'raw_data', im))
-                self.img_labels.append(os.path.join(root, seq, 'semantic_ood', im.replace('raw_data.jpg', 'semantic_ood.png')))
+        for seq in os.listdir(os.path.join(root, 'raw_data')):
+            for im in os.listdir(os.path.join(self.root, 'raw_data', seq)):
+                self.images.append(os.path.join(root, 'raw_data', seq, im))
+                self.img_labels.append(os.path.join(root, 'semantic_ood', seq, im.replace('raw_data.png', 'semantic_ood.png')))
 
     def __len__(self):
         return len(self.img_labels)
