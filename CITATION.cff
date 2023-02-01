@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Bogdoll"
+  given-names: "Daniel"
+  orcid: "https://orcid.org/0000-0003-0432-4937"
+- family-names: "Uhlemeyer"
+  given-names: "Svenja"
+  orcid: "https://orcid.org/0000-0001-5545-0875"
+- family-names: "Kowol"
+  given-names: "Kamil"
+  orcid: "https://orcid.org/0000-0001-6951-7081"
+title: "Visualizations for Perception Datasets for Anomaly Detection in Autonomous Driving"
+version: 1.0.0
+date-released: 2023-02-01
+url: "https://github.com/daniel-bogdoll/anomaly_datasets"
