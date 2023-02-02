@@ -7,8 +7,8 @@ These provide an overview of how many anomalies are contained in a dataset and i
 ```bash
 ├── datasets                  # Configurations for individual datasets
 ├── figures                   # Output
-| ├──── overlays              # Images overlaid with ground truth
-| ├──── pixel-distributions   # Accumulated anomaly masks    
+  ├── overlays              # Images overlaid with ground truth
+  └── pixel-distributions   # Accumulated anomaly masks    
 └── helper                    # Helper functions for CODA, Vistas-NP, and WD-Pascal
 ```
 
