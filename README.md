@@ -43,10 +43,10 @@ new_dataset:
 ## Citation
 If you find our work useful for your research, please cite our paper:
 ```
-@article{Bogdoll_Perception_2023_arXiv,
-    author    = {Daniel Bogdoll, Svenja Uhlemeyer, Kamil Kowol, J. Marius Zöllner},
-    title     = {{Perception Datasets for Anomaly Detection in Autonomous Driving: A Survey}},
-    journal   = {arXiv:XXXX.XXXXXXXX},
-    year      = {2023}
+@InProceedings{Bogdoll_Perception_2023_IV,
+  author    = {Bogdoll, Daniel and Uhlemeyer, Svenja and Kowol, Kamil and Z\"{o}llner, J. Marius},
+  title     = {{Perception Datasets for Anomaly Detection in Autonomous Driving: A Survey}}, 
+  booktitle = {Intelligent Vehicles Symposium (IV)},
+  year      = {2023}
 }
 ```
